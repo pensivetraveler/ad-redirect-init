@@ -9,3 +9,4 @@ sudo dnf install -y git
 certbot-3 --version
 sudo systemctl enable --now httpd
 sudo ss -ltnp | grep :80 || sudo lsof -i:80
+git clone "https://github.com/pensivetraveler/cf-redirect.git"
