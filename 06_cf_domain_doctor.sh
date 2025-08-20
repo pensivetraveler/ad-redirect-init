@@ -7,17 +7,6 @@
 #   - whois 없으면 자동 설치(패키지 관리자 자동 탐지)
 #   - IPv4/IPv6 경로, 엣지/오리진 인증서, SAN, 리다이렉트, NS/DS/CAA 점검
 #   - curl 'SSL certificate problem' 감지 → 가이드, --fix-ca 지정 시 자동 갱신 후 재시도
-#
-# 사용예:
-#      chmod +x cf_domain_doctor.sh
-#   진단만
-#      sudo ./cf_domain_doctor.sh example.com another.com
-#   에러 60(로컬 CA 문제) 자동 복구까지 시도
-#      sudo ./cf_domain_doctor.sh --fix-ca example.com
-#   오리진 직접 점검(퍼블릭 IP 지정)
-#      ORIGIN_IP=1.2.3.4 sudo ./cf_domain_doctor.sh example.com
-#
-
 
 set -euo pipefail
 RED=$'\e[31m'; GRN=$'\e[32m'; YLW=$'\e[33m'; BLU=$'\e[34m'; BLD=$'\e[1m'; DIM=$'\e[2m'; NC=$'\e[0m'
@@ -351,4 +340,3 @@ if [[ "$#" -lt 1 ]]; then
 fi
 
 for dom in "$@"; do diagnose "$dom"; done
-
