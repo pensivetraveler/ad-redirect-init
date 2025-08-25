@@ -15,6 +15,10 @@ ServerAlias ${WDOMAIN}
 DocumentRoot ${DOCROOT}
 ErrorLog  /var/log/httpd/${DOMAIN}_error.log
 CustomLog /var/log/httpd/${DOMAIN}_access.log combined
+<Directory "${DOCROOT}">
+  AllowOverride All
+  Require all granted
+</Directory>
 </VirtualHost>
 CONF
 sudo apachectl configtest && sudo systemctl reload httpd
@@ -76,4 +80,11 @@ sudo certbot-3 renew --dry-run
 
 # ===== 퍼블리싱 적용 =====
 sudo mkdir ${DOCROOT}
-sudo vi "${DOCROOT}/index.html"
+cd ${DOCROOT}
+sudo composer require mobiledetect/mobiledetectlib
+
+sudo vi common.php
+sudo vi index.php
+sudo vi api.php
+sudo vi redirect.html
+sudo vi shop.php

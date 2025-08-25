@@ -56,6 +56,10 @@ sudo tee "${VHOST80_CONF}" >/dev/null <<CONF
 ServerName ${OLD_DOMAIN}
 ServerAlias ${OLD_WDOMAIN}
 DocumentRoot ${OLD_DOCROOT}
+<Directory "${OLD_DOCROOT}">
+  AllowOverride All
+  Require all granted
+</Directory>
 ErrorLog  /var/log/httpd/${OLD_DOMAIN}_error.log
 CustomLog /var/log/httpd/${OLD_DOMAIN}_access.log combined
 </VirtualHost>

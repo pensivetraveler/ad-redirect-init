@@ -1,5 +1,5 @@
 CF_DOMAIN="example.com"
-DOC_ROOT="/var/www/html/${CF_DOMAIN}"
+DOCROOT="/var/www/html/${CF_DOMAIN}"
 
 ######## 1. pem, key 파일 생성
 sudo mkdir -p /etc/ssl/cf-origin
@@ -22,6 +22,10 @@ ServerAlias www.${CF_DOMAIN}
 DocumentRoot /var/www/html/${CF_DOMAIN}
 ErrorLog  /var/log/httpd/${CF_DOMAIN}_error.log
 CustomLog /var/log/httpd/${CF_DOMAIN}_access.log combined
+<Directory "${DOCROOT}">
+  AllowOverride All
+  Require all granted
+</Directory>
 RewriteEngine on
 RewriteCond %{SERVER_NAME} =www.${CF_DOMAIN}.shop [OR]
 RewriteCond %{SERVER_NAME} =${CF_DOMAIN}
