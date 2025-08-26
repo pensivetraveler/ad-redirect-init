@@ -15,11 +15,11 @@ ServerAlias ${WDOMAIN}
 DocumentRoot ${DOCROOT}
 ErrorLog  /var/log/httpd/${DOMAIN}_error.log
 CustomLog /var/log/httpd/${DOMAIN}_access.log combined
+</VirtualHost>
 <Directory "${DOCROOT}">
   AllowOverride All
   Require all granted
 </Directory>
-</VirtualHost>
 CONF
 sudo apachectl configtest && sudo systemctl reload httpd
 fi
@@ -79,12 +79,7 @@ systemctl list-timers '*certbot*' || true
 sudo certbot-3 renew --dry-run
 
 # ===== 퍼블리싱 적용 =====
-sudo mkdir ${DOCROOT}
+cd /var/www/html
+sudo git clone https://github.com/pensivetraveler/ad-redirect-php.git
+sudo mv ad-redirect-php ${DOCROOT}
 cd ${DOCROOT}
-sudo composer require mobiledetect/mobiledetectlib
-
-sudo vi common.php
-sudo vi index.php
-sudo vi api.php
-sudo vi redirect.html
-sudo vi shop.php
